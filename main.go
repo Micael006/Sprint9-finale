@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"sync"
 	"time"
@@ -19,11 +20,9 @@ func generateRandomElements(size int) []int {
 		return []int{}
 	}
 
-	rand.Seed(time.Now().UnixNano())
-
 	data := make([]int, size)
 	for i := 0; i < size; i++ {
-		data[i] = 1 + rand.Intn(2147483647) // Взял край диапазона
+		data[i] = 1 + rand.Intn(math.MaxInt) // Взял край диапазона
 	}
 	return data
 }
@@ -67,13 +66,7 @@ func maxChunks(data []int) int {
 				end = len(data)
 			}
 	
-			localMaxs[i] = data[start]
-
-			for j := start + 1; j < end; j++ {
-				if data[j] > localMaxs[i] {
-					localMaxs[i] = data[j]
-				}
-			}
+			localMaxs[i] = maximum(data[start:end])
 		}(i*chunkSize, (i+1)*chunkSize)
 	}
 

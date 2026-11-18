@@ -3,6 +3,7 @@ package main
 // Пишите тесты в этом файле
 import (
 	"testing"
+	"math"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -11,7 +12,7 @@ import (
 func TestGenerateRandomElements(t *testing.T) {
 	// Так как функция не подразумевает передачу фиксированной случайности, 
 	// проверяю только длину и принадлеждность элементов диапазону
-	const maxVal int = 2147483647
+	const maxVal int = math.MaxInt
 
 	tests := []struct {
 		name string
